@@ -449,14 +449,14 @@
     var THIS     = this,
       width      = letters[index].width,
       top      = coords[1]-letters.base,
-      left     = coords[0]-width/2,
+      left     = (coords[0]-width/2).toFixed(20),
       warpCSS = function(letters, transform){
               var transVal = "transform: "+transform+";",
                 transOr  = "transform-origin: 50% "+letters.base+"px; ";
 
                 return  "display: block;"+
                   "visibility: inherit;"+
-                  "width:"+letters.width+"px;"+
+                  "width:"+letters[index].width+"px;"+
                   prefix+transOr+
                   prefix+transVal+
                   transOr+

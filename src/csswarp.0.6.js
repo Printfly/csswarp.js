@@ -449,14 +449,14 @@
     var THIS     = this,
       width      = letters[index].width,
       top      = coords[1]-letters.base,
-      left     = coords[0]-width/2,
+      left     = (coords[0]-width/2).toFixed(20),
       warpCSS = function(letters, transform){
               var transVal = "transform: "+transform+";",
                 transOr  = "transform-origin: 50% "+letters.base+"px; ";
 
                 return  "display: block;"+
                   "visibility: inherit;"+
-                  "width:"+letters.width+"px;"+
+                  "width:"+letters[index].width+"px;"+
                   prefix+transOr+
                   prefix+transVal+
                   transOr+
@@ -539,7 +539,7 @@
       letters.lngt+= metrics[curChar];
     }
 
-    letters.kerning = kerning!=="normal" ? parseInt(kerning) : 0;
+    letters.kerning = kerning!=="normal" ? parseInt(kerning, 10) : 0;
     letters.indent = calcWidth("indent");
     letters.base = calcBaseline();
     letters.lngt+= (i-1)*letters.kerning;
@@ -549,7 +549,7 @@
     function calcBaseline(){
         var testDiv = document.createElement("div"),
           img = document.createElement("img"),
-          lineHeight = getStyle(node, "lineHeight"),
+          lineHeight = getStyle(node, "line-height"),
           base;
 
         img.width = 1;
@@ -581,7 +581,7 @@
 
           return w;
         }else if(/px/gi.test(val)){
-          return parseInt(val);
+          return parseInt(val, 10);
         }else{
           return 0;
         }
